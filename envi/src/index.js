@@ -25,6 +25,11 @@ const Login = Loadable({
     loading: Loading
   });
 
+  const Register = Loadable({
+    loader: () => import('./Register/Register'),
+    loading: Loading
+  });
+
 
 
 class App extends Component {
@@ -33,6 +38,8 @@ class App extends Component {
       <Router>
           <Route exact path="/home" component={Home} />
           <Route exact path="/Login" component={Login} />
+          <Route exact path="/Register" component={Register} />
+          
       </Router>
     );
   }
