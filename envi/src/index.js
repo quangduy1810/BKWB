@@ -26,14 +26,21 @@ const Login = Loadable({
     loading: Loading
   });
 
+  const Register = Loadable({
+    loader: () => import('./Register/Register'),
+    loading: Loading
+  });
+
 
 
 class App extends Component {
   render() {
     return (
       <Router>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          
       </Router>
     );
   }
