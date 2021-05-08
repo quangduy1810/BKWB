@@ -1,24 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Register.css";
 import { Form, Input, Button, Checkbox } from "antd";
 
-export default class Register extends React.Component {
-  constructor() {
-    super();
-  }
+class Register extends React.Component {
 
-  layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+  onFinish = () => {
+    console.log("Success:");
   };
-  tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
-  onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  onFinishFailed = () => {
+    console.log("Failed:");
   };
 
   render() {
@@ -65,3 +55,4 @@ export default class Register extends React.Component {
     );
   }
 }
+export default (Register)
