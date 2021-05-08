@@ -2,6 +2,7 @@ import Loading from './component/Loading';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Loadable from 'react-loadable';
+import './index.css';
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
 // export default {
 //     routes :[
@@ -31,8 +32,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/Login" component={Login} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
       </Router>
     );
   }
