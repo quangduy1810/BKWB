@@ -1,53 +1,93 @@
 import React from "react";
 import "./Register.css";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
+import "antd/dist/antd.css";
 
-class Register extends React.Component {
+export default class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
 
-  onFinish = () => {
-    console.log("Success:");
+  layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  tailLayout = {
+    wrapperCol: {
+      offset: 8,
+      span: 16,
+    },
+  };
+  onFinish = (values) => {
+    console.log("Success:", values);
   };
   onFinishFailed = () => {
     console.log("Failed:");
   };
 
+  onChangeUsername = (evt) => {
+    this.setState({ username: evt.target.value });
+  };
+
+  onChangePassword = (evt) => {
+    this.setState({ password: evt.target.value });
+  };
+
   render() {
     return (
-      <div className='container'>
+      <div className="Container">
         <Form
           {...this.layout}
           name="basic"
-          initialValues={{ remember: true }}
+          initialValues={{
+            remember: true,
+          }}
           onFinish={this.onFinish}
           onFinishFailed={this.onFinishFailed}
         >
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+            ]}
           >
-            <Input />
+            <Input
+              value={this.state.username}
+              onChange={this.onChangeUsername}
+            />
           </Form.Item>
 
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
           >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            {...this.tailLayout}
-            name="remember"
-            valuePropName="checked"
-          >
-            <Checkbox>Remember me</Checkbox>
+            <Input.Password
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            />
           </Form.Item>
 
           <Form.Item {...this.tailLayout}>
             <Button type="primary" htmlType="submit">
-              Submit
+              Register
             </Button>
           </Form.Item>
         </Form>
@@ -55,4 +95,3 @@ class Register extends React.Component {
     );
   }
 }
-export default (Register)

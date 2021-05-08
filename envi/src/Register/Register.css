@@ -6,8 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-.container{
+.Container{
   width: 100%;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
