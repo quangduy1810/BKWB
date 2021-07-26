@@ -9,7 +9,9 @@ const Board = () => {
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         const getData = async () => {
-            const res = await axios.get(`https://bkworkboard.herokuapp.com/projects/${id}`);
+            const res = await axios.get(`https://bkworkboard.herokuapp.com/projects/${id}`, {
+                headers: {Authorization: 'Bearer ' + localStorage.getItem('accessToken')}
+            });
             const{ project } = res.data;
             setProject(project);
             setLoading(false);
@@ -35,15 +37,15 @@ const Board = () => {
                     >
                         <Card.Header>To Do</Card.Header>
                         <Card.Body>
-                            <Card.Text>
-                                {project.backlogs.map(task => (
-                                    <Alert variant={task.priority=='High'?'alert':'warning'}>
-                                        {task.name}
-                                    </Alert>
-                                ))}
-                            </Card.Text>
+                            {project.backlogs.map(task => ((task.status==='To Do') &&
+                                <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'}>
+                                    <p>{task.name}</p>
+                                    <p>Due date: {task.due_date}</p>
+                                </Alert>
+                            ))}
                         </Card.Body>
                     </Card>
+                    
                 </Col>
                 <Col>
                     <Card
@@ -52,10 +54,17 @@ const Board = () => {
                         style={{ width: '20rem' }}
                         className="mb-2 project"
                     >
+                        <Card.Header>Doing</Card.Header>
                         <Card.Body>
-                        <Card.Title>Doing</Card.Title>
+                            {project.backlogs.map(task => ((task.status==='Doing') &&
+                                <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'}>
+                                    <p>{task.name}</p>
+                                    <p>Due date: {task.due_date}</p>
+                                </Alert>
+                            ))}
                         </Card.Body>
                     </Card>
+                    
                 </Col>
                 <Col>
                     <Card
@@ -64,10 +73,17 @@ const Board = () => {
                         style={{ width: '20rem' }}
                         className="mb-2 project"
                     >
+                        <Card.Header>Done</Card.Header>
                         <Card.Body>
-                        <Card.Title>Done</Card.Title>
+                            {project.backlogs.map(task => ((task.status==='Done') &&
+                                <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'}>
+                                    <p>{task.name}</p>
+                                    <p>Due date: {task.due_date}</p>
+                                </Alert>
+                            ))}
                         </Card.Body>
                     </Card>
+                    
                 </Col>
             </Row>
         </div>)

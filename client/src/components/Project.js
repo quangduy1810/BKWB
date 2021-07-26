@@ -11,7 +11,9 @@ const Project = () => {
     const [projects, setProject] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            const res = await axios.get('https://bkworkboard.herokuapp.com/projects');
+            const res = await axios.get('https://bkworkboard.herokuapp.com/projects', {
+                headers: {Authorization: 'Bearer ' + localStorage.getItem('accessToken')}
+            });
             const{ projects } = res.data;
             setProject(projects);
         }
