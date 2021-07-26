@@ -23,7 +23,7 @@ const Login = () => {
         }).then((data) => {
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('refreshToken', data.refreshToken);
-            history.go(-1);
+            history.push('/dashboard');
         })
     }
     return (

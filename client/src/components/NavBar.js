@@ -26,12 +26,12 @@ const NavBar = () => {
             </Navbar.Brand>
             <Nav className="me-auto">
                 <Nav>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'rgba(255,255,255,.5)' }}>Work Board</Link>
+                    <Link to="/dashboard" style={{ textDecoration: 'none', color: 'rgba(255,255,255,.5)' }}>Work Board</Link>
                 </Nav>
             </Nav>
             <Nav>
                 <Nav>
-                    {!user && <Link to="/login" style={{ textDecoration: 'none', color: 'rgba(255,255,255,.5)' }}>Login</Link>}
+                    {user && user.name}
                 </Nav>
                 <Nav.Link eventKey={2} href="#memes">
                     Logout
