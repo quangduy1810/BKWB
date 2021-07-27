@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isPending, setIsPending] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(true);
     const history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = {username, password};
+        localStorage.setItem('user', username);
         setIsPending(true);
 
         fetch('https://bkworkboard.herokuapp.com/users/login', {
@@ -21,9 +22,14 @@ const Login = () => {
             setIsPending(false);
             return res.json();
         }).then((data) => {
+            setIsSuccess(true);
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('refreshToken', data.refreshToken);
+            localStorage.setItem('isAuth', true);
             history.push('/dashboard');
+        }).catch(error => {
+            setIsPending(false);
+            setIsSuccess(false);
         })
     }
     return (
@@ -48,6 +54,7 @@ const Login = () => {
                 { isPending && <Button variant="primary" type="submit" disabled>
                     Submit...
                 </Button> }
+                { !isSuccess && <div>Login failed! Username or password is incorrect</div> }
             </Form>
         </div>
     )

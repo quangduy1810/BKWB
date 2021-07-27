@@ -4,6 +4,7 @@ import Project from './components/Project';
 import Board from './components/Board';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
+import ProtectedRoute from './components/ProtectedRoute';
 import { useLocation } from 'react-router';
 import {
   Switch,
@@ -19,8 +20,8 @@ function App() {
       {location.pathname!=='/'?<NavBar/>:''}
       <Switch>
         <Route path="/" exact component = {Login}/>
-        <Route path="/dashboard" exact component = {Project}/>
-        <Route path="/board/:id" exact component = {Board}/>
+        <ProtectedRoute path="/dashboard" exact component = {Project}/>
+        <ProtectedRoute path="/board/:id" exact component = {Board}/>
         <Route path="*" exact component = {NotFound}/>
       </Switch>
     </div>

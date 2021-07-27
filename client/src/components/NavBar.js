@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import axios from 'axios';
 import {
-    Link
+    Link,
+    useHistory
 } from "react-router-dom";
 
 const NavBar = () => {
     const [user, setUser] = useState(null);
+    const history = useHistory();
     useEffect(() => {
         const getData = async () => {
             const res = await axios.get('https://bkworkboard.herokuapp.com/users', {
@@ -17,6 +19,11 @@ const NavBar = () => {
         }
         getData();
     }, []);
+
+    const logout = () => {
+        localStorage.clear();
+        history.push('/');
+    }
     return (
     <div>
         <Navbar bg="dark" variant="dark">
@@ -33,7 +40,7 @@ const NavBar = () => {
                 <Nav>
                     {user && user.name}
                 </Nav>
-                <Nav.Link eventKey={2} href="#memes">
+                <Nav.Link onClick={logout}>
                     Logout
                 </Nav.Link>
             </Nav>
