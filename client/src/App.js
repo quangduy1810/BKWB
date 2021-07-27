@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Project from './components/Project';
 import Board from './components/Board';
 import Login from './components/Login';
+import NotFound from './components/NotFound';
 import { useLocation } from 'react-router';
 import {
   Switch,
@@ -20,6 +21,7 @@ function App() {
       <Switch>
         <Route path="/dashboard" exact component = {Project}/>
         <Route path="/board/:id" exact component = {Board}/>
+        <Route path="*" exact component = {NotFound}/>
       </Switch>
     </div>
   );
