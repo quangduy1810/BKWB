@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Button, Alert, Modal, Form } from 'react-bootstrap';
+import { Card, Row, Col, Button, Alert, Modal, Form, OverlayTrigger, Popover } from 'react-bootstrap';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -26,6 +26,34 @@ const Board = () => {
         }
         getData();
     }, [project]);
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`https://bkworkboard.herokuapp.com/backlogs/${id}`, {
+                headers: {Authorization: 'Bearer ' + localStorage.getItem('accessToken')}
+            });
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const handleUpdate = async (e, id) => {
+        console.log(status);
+        e.preventDefault();
+        const taskUpdate = {
+            status: status
+        }
+        try {
+            await axios.put(`https://bkworkboard.herokuapp.com/backlogs/${id}`, JSON.stringify(taskUpdate), {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                    'Content-Type': 'application/json'
+                }
+            });
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -115,6 +143,35 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <OverlayTrigger
+                                    trigger="click"
+                                    key={task._id}
+                                    placement="bottom"
+                                    overlay={
+                                        <Popover id={`popover-positioned-bottom`}>
+                                        <Popover.Header as="h3">{task.name}</Popover.Header>
+                                        <Popover.Body>
+                                            <Form onSubmit={(e) => handleUpdate(e, task._id)}>
+                                                <Form.Group className="mb-5" controlId="formBasicStatus">
+                                                    <Form.Label>Status</Form.Label>
+                                                    <Form.Select aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
+                                                        <option>Select Status</option>
+                                                        <option value="To Do">To Do</option>
+                                                        <option value="Doing">Doing</option>
+                                                        <option value="Done">Done</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                                <Button variant="primary" type="submit">
+                                                    Update
+                                                </Button>
+                                            </Form>
+                                        </Popover.Body>
+                                        </Popover>
+                                    }
+                                    >
+                                        <Button variant="outline-secondary" size="sm">Update</Button>
+                                    </OverlayTrigger>
+                                    <Button variant="outline-secondary" size="sm" onClick={() => handleDelete(task._id)}>Delete</Button>
                                 </Alert>
                             ))}
                         </Card.Body>
@@ -134,6 +191,35 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <OverlayTrigger
+                                    trigger="click"
+                                    key={task._id}
+                                    placement="bottom"
+                                    overlay={
+                                        <Popover id={`popover-positioned-bottom`}>
+                                        <Popover.Header as="h3">{task.name}</Popover.Header>
+                                        <Popover.Body>
+                                            <Form onSubmit={(e) => handleUpdate(e, task._id)}>
+                                                <Form.Group className="mb-5" controlId="formBasicStatus">
+                                                    <Form.Label>Status</Form.Label>
+                                                    <Form.Select aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
+                                                        <option>Select Status</option>
+                                                        <option value="To Do">To Do</option>
+                                                        <option value="Doing">Doing</option>
+                                                        <option value="Done">Done</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                                <Button variant="primary" type="submit">
+                                                    Update
+                                                </Button>
+                                            </Form>
+                                        </Popover.Body>
+                                        </Popover>
+                                    }
+                                    >
+                                        <Button variant="outline-secondary" size="sm">Update</Button>
+                                    </OverlayTrigger>
+                                    <Button variant="outline-secondary" size="sm" onClick={() => handleDelete(task._id)}>Delete</Button>
                                 </Alert>
                             ))}
                         </Card.Body>
@@ -153,6 +239,35 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <OverlayTrigger
+                                    trigger="click"
+                                    key={task._id}
+                                    placement="bottom"
+                                    overlay={
+                                        <Popover id={`popover-positioned-bottom`}>
+                                        <Popover.Header as="h3">{task.name}</Popover.Header>
+                                        <Popover.Body>
+                                            <Form onSubmit={(e) => handleUpdate(e, task._id)}>
+                                                <Form.Group className="mb-5" controlId="formBasicStatus">
+                                                    <Form.Label>Status</Form.Label>
+                                                    <Form.Select aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
+                                                        <option>Select Status</option>
+                                                        <option value="To Do">To Do</option>
+                                                        <option value="Doing">Doing</option>
+                                                        <option value="Done">Done</option>
+                                                    </Form.Select>
+                                                </Form.Group>
+                                                <Button variant="primary" type="submit">
+                                                    Update
+                                                </Button>
+                                            </Form>
+                                        </Popover.Body>
+                                        </Popover>
+                                    }
+                                    >
+                                        <Button variant="outline-secondary" size="sm">Update</Button>
+                                    </OverlayTrigger>
+                                    <Button variant="outline-secondary" size="sm" onClick={() => handleDelete(task._id)}>Delete</Button>
                                 </Alert>
                             ))}
                         </Card.Body>

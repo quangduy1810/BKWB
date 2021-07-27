@@ -37,8 +37,8 @@ const NavBar = () => {
                 </Nav>
             </Nav>
             <Nav>
-                <Nav>
-                    {user && user.name}
+                <Nav style={{ textDecoration: 'none', color: 'rgba(255,255,255,.5)', marginTop: '7px', marginRight: '10px' }}>
+                    {localStorage.getItem('user')}
                 </Nav>
                 <Nav.Link onClick={logout}>
                     Logout

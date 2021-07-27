@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Project from './components/Project';
 import Board from './components/Board';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 import NotFound from './components/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useLocation } from 'react-router';
@@ -17,9 +18,10 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      {location.pathname!=='/'?<NavBar/>:''}
+      {(location.pathname!=='/' && location.pathname!=='/signup') ? <NavBar/> : ''}
       <Switch>
         <Route path="/" exact component = {Login}/>
+        <Route path="/signup" exact component = {SignUp}/>
         <ProtectedRoute path="/dashboard" exact component = {Project}/>
         <ProtectedRoute path="/board/:id" exact component = {Board}/>
         <Route path="*" exact component = {NotFound}/>

@@ -96,7 +96,7 @@ const Project = () => {
                                 <Card.Title>{project.name}</Card.Title>
                                 <Card.Text>
                                     <p>Date Created: {new Date(project.created_at).toLocaleString()}</p>
-                                    <p>Created By: {project.owner.username}</p>
+                                    <p>Created By: {project.owner.name}</p>
                                 </Card.Text>
                                 </Card.Body>
                             </Link>
