@@ -17,8 +17,8 @@ function App() {
       <header className="App-header">
       </header>
       {location.pathname!=='/'?<NavBar/>:''}
-      <Route path="/" exact component = {Login}/>
       <Switch>
+        <Route path="/" exact component = {Login}/>
         <Route path="/dashboard" exact component = {Project}/>
         <Route path="/board/:id" exact component = {Board}/>
         <Route path="*" exact component = {NotFound}/>

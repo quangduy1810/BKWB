@@ -17,7 +17,7 @@ const Board = () => {
             setLoading(false);
         }
         getData();
-    }, [id]);
+    }, [project]);
 
     return  (!isLoading &&(
         <div>
