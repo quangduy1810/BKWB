@@ -14,6 +14,15 @@ const Project = () => {
     const [estimateDueDate, setEstimateDueDate] = useState('');
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`https://bkworkboard.herokuapp.com/projects/${id}`, {
+                headers: {Authorization: 'Bearer ' + localStorage.getItem('accessToken')}
+            });
+        } catch(error) {
+            console.log(error);
+        }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const owner = localStorage.getItem('user');
@@ -85,7 +94,7 @@ const Project = () => {
                 {projects.map((project, idx) => (
                     <Col>
                         <Card
-                        bg={colors[idx].toLowerCase()}
+                        bg={colors[idx %10].toLowerCase()}
                         text='light'
                         style={{ width: '18rem' }}
                         className="mb-2 project"
@@ -100,6 +109,7 @@ const Project = () => {
                                 </Card.Text>
                                 </Card.Body>
                             </Link>
+                            { (project.owner.username === localStorage.getItem('user')) && <Button variant="danger" size="sm" onClick={() => handleDelete(project._id)}>Delete</Button>}
                         </Card>
                     </Col>
                 ))}
