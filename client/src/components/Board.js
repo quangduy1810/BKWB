@@ -143,6 +143,7 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <p>Created By: {localStorage.getItem('user')}</p>
                                     <OverlayTrigger
                                     trigger="click"
                                     key={task._id}
@@ -191,6 +192,7 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <p>Created By: {localStorage.getItem('user')}</p>
                                     <OverlayTrigger
                                     trigger="click"
                                     key={task._id}
@@ -239,6 +241,7 @@ const Board = () => {
                                 <Alert variant={task.priority==='High'?'danger':task.priority==='Medium'?'warning':'success'} key={task._id}>
                                     <p>{task.name}</p>
                                     <p>Due date: {task.due_date}</p>
+                                    <p>Created By: {localStorage.getItem('user')}</p>
                                     <OverlayTrigger
                                     trigger="click"
                                     key={task._id}
